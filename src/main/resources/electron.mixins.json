@@ -1,0 +1,15 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "top.yunmouren.electron.mixin",
+  "compatibilityLevel": "JAVA_8",
+  "refmap": "electron.refmap.json",
+  "mixins": [
+  ],
+  "client": [
+    "NoFullscreen"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}
