@@ -4,25 +4,27 @@ import net.minecraft.client.Minecraft;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import top.yunmouren.electron.Client.GUI.CustomGUIScreen;
-import top.yunmouren.electron.Server.tools.Http.BuildUrl;
+import top.yunmouren.electron.Browser.Api.Api;
 
-import static top.yunmouren.electron.Client.Tools.overlapWindows.WindowResizeListener.onScreenResize;
+import static top.yunmouren.electron.Browser.Browser.overlapWindows.WindowResizeListener.onScreenResize;
+
+
 @OnlyIn(Dist.CLIENT)
 public class ClientEnumeration {
     public ClientEnumeration(String ctx, String body) {
         switch (ctx) {
             case "joinGUI":
-                BuildUrl.joinGui();
+                Api.joinGui();
                 break;
             case "exitGUI":
-                BuildUrl.exitGui();
+                Api.exitGui();
                 break;
             case "openDevTools":
-                BuildUrl.openDevTools();
+                Api.openDevTools();
                 break;
             case "loadUrl":
                 openGUIOnClient(body);
-                BuildUrl.joinGui();
+                Api.joinGui();
                 break;
             case "RecalculateArea":
                 onScreenResize();

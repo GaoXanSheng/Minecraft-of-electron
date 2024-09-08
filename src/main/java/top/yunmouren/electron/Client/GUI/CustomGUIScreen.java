@@ -6,7 +6,7 @@ import net.minecraft.network.chat.Component;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import org.jetbrains.annotations.NotNull;
-import top.yunmouren.electron.Server.tools.Http.BuildUrl;
+import top.yunmouren.electron.Browser.Api.Api;
 
 @OnlyIn(Dist.CLIENT)
 public class CustomGUIScreen extends Screen {
@@ -20,8 +20,8 @@ public class CustomGUIScreen extends Screen {
     protected void init() {
         // 初始化GUI组件
         super.init();
-        BuildUrl.joinGui();
-        BuildUrl.loadUrl(url);
+        Api.joinGui();
+        Api.loadUrl(url);
     }
     @Override
     public void render(@NotNull PoseStack poseStack, int mouseX, int mouseY, float delta) {
@@ -30,6 +30,6 @@ public class CustomGUIScreen extends Screen {
     @Override
     public void onClose() {
         super.onClose();
-        BuildUrl.exitGui();
+        Api.exitGui();
     }
 }
