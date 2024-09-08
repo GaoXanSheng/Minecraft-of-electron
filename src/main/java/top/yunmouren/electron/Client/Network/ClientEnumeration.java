@@ -21,7 +21,7 @@ public class ClientEnumeration {
                 BuildUrl.openDevTools();
                 break;
             case "loadUrl":
-                openGUIOnClient("TEST",body);
+                openGUIOnClient(body);
                 BuildUrl.joinGui();
                 break;
             case "RecalculateArea":
@@ -33,8 +33,8 @@ public class ClientEnumeration {
         }
     }
 
-    private static void openGUIOnClient(String argument,String url) {
-        Minecraft.getInstance().setScreen(new CustomGUIScreen(argument,url));
+    private static void openGUIOnClient(String url) {
+        Minecraft.getInstance().setScreen(new CustomGUIScreen("TEST",url));
     }
 
     public static void closeGUIOnClient() {

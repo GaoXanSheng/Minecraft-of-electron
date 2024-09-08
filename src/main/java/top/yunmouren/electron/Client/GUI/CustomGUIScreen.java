@@ -25,7 +25,6 @@ public class CustomGUIScreen extends Screen {
     }
     @Override
     public void render(@NotNull PoseStack poseStack, int mouseX, int mouseY, float delta) {
-        this.renderBackground(poseStack);
         super.render(poseStack, mouseX, mouseY, delta);
     }
     @Override
