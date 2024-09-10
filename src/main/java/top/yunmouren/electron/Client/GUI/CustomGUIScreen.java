@@ -1,11 +1,13 @@
 package top.yunmouren.electron.Client.GUI;
 
 import com.mojang.blaze3d.vertex.PoseStack;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.Component;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import org.jetbrains.annotations.NotNull;
+import org.lwjgl.glfw.GLFW;
 import top.yunmouren.electron.Browser.Api.Api;
 
 @OnlyIn(Dist.CLIENT)

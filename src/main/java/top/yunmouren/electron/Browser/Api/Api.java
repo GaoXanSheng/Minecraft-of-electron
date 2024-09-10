@@ -2,44 +2,39 @@ package top.yunmouren.electron.Browser.Api;
 
 
 import com.google.gson.JsonObject;
-import top.yunmouren.electron.Client.Client;
+import top.yunmouren.electron.Browser.WebSocket.Router.WebSocketEndpoint;
 
 import java.util.Timer;
 import java.util.TimerTask;
 
 public class Api {
-    public static String CombiningURL(String url, String json) {
-        return Client.browser.post("http://127.0.0.1:" + Client.browser.Port + url, json);
-    }
-
-    public static void sendInit() {
-        CombiningURL("/api/init", "{}");
+    public static void initBrowser() {
+        WebSocketEndpoint.socketSend(EumHand.initBrowser.name(),"{}");
     }
 
     public static void loadUrl(String url) {
         JsonObject json = new JsonObject();
         json.addProperty("url", url);
-        CombiningURL("/api/loadUrl", json.toString());
+        WebSocketEndpoint.socketSend(EumHand.loadUrl.name(),json.toString());
     }
 
     public static void joinGui() {
-        CombiningURL("/api/joinGui", "{}");
+        WebSocketEndpoint.socketSend(EumHand.joinGui.name(),"{}");
     }
 
     public static void exitGui() {
-        CombiningURL("/api/exitGui", "{}");
+        WebSocketEndpoint.socketSend(EumHand.exitGui.name(),"{}");
     }
 
     public static void openDevTools() {
-        CombiningURL("/api/openDevTools", "{}");
+        WebSocketEndpoint.socketSend(EumHand.openDevTools.name(),"{}");
     }
 
-    public static String getTitle() {
-        return CombiningURL("/api/getTitle", "{}");
+    public static void getTitle() {
+        WebSocketEndpoint.socketSend(EumHand.getTitle.name(),"{}");
     }
 
     private static Timer debounceTimer;
-
     public static void setPosition(Number width, Number height) {
         // 如果之前的定时任务未完成，则取消它
         if (debounceTimer != null) {
@@ -54,7 +49,7 @@ public class Api {
                 JsonObject json = new JsonObject();
                 json.addProperty("width", width);
                 json.addProperty("height", height);
-                CombiningURL("/api/setPosition", json.toString());
+                WebSocketEndpoint.socketSend(EumHand.setPosition.name(), json.toString());
             }
         }, 100);
     }

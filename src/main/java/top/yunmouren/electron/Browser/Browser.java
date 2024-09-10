@@ -9,6 +9,7 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.client.event.ScreenEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
+import top.yunmouren.electron.Browser.Api.Api;
 import top.yunmouren.electron.Electron;
 
 import java.io.BufferedReader;
@@ -62,7 +63,7 @@ public class Browser {
         return RandomPort();
     }
 
-    public String post(String webUrl, String json) {
+    public static String post(String webUrl, String json) {
         String charset = "UTF-8";
         OutputStreamWriter out = null;
         BufferedReader in = null;
@@ -135,7 +136,7 @@ public class Browser {
             Minecraft.getInstance().getWindow().setTitle(Minecraft_Title);
             // 查找两个父窗口的句柄，通过标题
             MinecrafthWndParent = user32.FindWindow(null, Minecraft_Title);
-            browserhWndParent = user32.FindWindow(null, Web_Title);
+            browserhWndParent = user32.FindWindow(null,Web_Title);
             if (MinecrafthWndParent != null && browserhWndParent != null) {
                 CalculateFrameArea();
                 OverlapWindows(MinecrafthWndParent, browserhWndParent);
