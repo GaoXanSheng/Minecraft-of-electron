@@ -1,0 +1,9 @@
+POST http://localhost:55272/
+Content-Type: application/json
+
+{
+  "type": "closeGUIOnClient",
+  "body": ""
+}
+
+###

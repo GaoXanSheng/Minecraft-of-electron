@@ -2,39 +2,47 @@ package top.yunmouren.electron.Browser.Api;
 
 
 import com.google.gson.JsonObject;
-import top.yunmouren.electron.Browser.WebSocket.Router.WebSocketEndpoint;
+import top.yunmouren.electron.Browser.tools.Http;
+import top.yunmouren.electron.Client.Client;
 
 import java.util.Timer;
 import java.util.TimerTask;
 
 public class Api {
-    public static void initBrowser() {
-        WebSocketEndpoint.socketSend(EumHand.initBrowser.name(),"{}");
+    public static String CombiningURL(String url, String json) {
+        return Http.post("http://127.0.0.1:" + Client.browser.BrowserPort + url, json);
+    }
+
+    public static void sendInit() {
+        CombiningURL("/api/init", "{}");
     }
 
     public static void loadUrl(String url) {
         JsonObject json = new JsonObject();
         json.addProperty("url", url);
-        WebSocketEndpoint.socketSend(EumHand.loadUrl.name(),json.toString());
+        CombiningURL("/api/loadUrl", json.toString());
     }
 
     public static void joinGui() {
-        WebSocketEndpoint.socketSend(EumHand.joinGui.name(),"{}");
+        CombiningURL("/api/joinGui", "{}");
+        Client.browser.Api.SetForegroundWindow(Client.browser.Api.getBrowserhWndParent());
     }
 
     public static void exitGui() {
-        WebSocketEndpoint.socketSend(EumHand.exitGui.name(),"{}");
+        CombiningURL("/api/exitGui", "{}");
+        Client.browser.Api.SetForegroundWindow(Client.browser.Api.getMinecrafthWndParent());
     }
 
     public static void openDevTools() {
-        WebSocketEndpoint.socketSend(EumHand.openDevTools.name(),"{}");
+        CombiningURL("/api/openDevTools", "{}");
     }
 
-    public static void getTitle() {
-        WebSocketEndpoint.socketSend(EumHand.getTitle.name(),"{}");
+    public static String getTitle() {
+        return CombiningURL("/api/getTitle", "{}");
     }
 
     private static Timer debounceTimer;
+
     public static void setPosition(Number width, Number height) {
         // 如果之前的定时任务未完成，则取消它
         if (debounceTimer != null) {
@@ -49,8 +57,8 @@ public class Api {
                 JsonObject json = new JsonObject();
                 json.addProperty("width", width);
                 json.addProperty("height", height);
-                WebSocketEndpoint.socketSend(EumHand.setPosition.name(), json.toString());
+                CombiningURL("/api/setPosition", json.toString());
             }
-        }, 100);
+        }, 200);
     }
 }

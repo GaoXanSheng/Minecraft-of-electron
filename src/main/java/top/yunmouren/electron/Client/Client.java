@@ -18,7 +18,7 @@ public class Client {
     public void onClientSetup(final FMLClientSetupEvent event) {
         try {
             Thread.sleep(3000);
-            new Browser.overlapWindows();
+            browser.Api.overlapWindows();
         } catch (InterruptedException e) {
             Electron.logger.error(e.getMessage());
         }
