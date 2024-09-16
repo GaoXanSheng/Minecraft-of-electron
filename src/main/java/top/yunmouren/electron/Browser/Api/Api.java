@@ -25,12 +25,12 @@ public class Api {
 
     public static void joinGui() {
         CombiningURL("/api/joinGui", "{}");
-        Client.browser.Api.SetForegroundWindow(Client.browser.Api.getBrowserhWndParent());
+        Client.browser.Api.SetFocus(Client.browser.Api.getBrowserhWndParent());
     }
 
     public static void exitGui() {
         CombiningURL("/api/exitGui", "{}");
-        Client.browser.Api.SetForegroundWindow(Client.browser.Api.getMinecrafthWndParent());
+        Client.browser.Api.SetFocus(Client.browser.Api.getMinecrafthWndParent());
     }
 
     public static void openDevTools() {
@@ -55,6 +55,7 @@ public class Api {
             public void run() {
                 // 要执行的操作
                 JsonObject json = new JsonObject();
+                json.addProperty("type", "setPosition");
                 json.addProperty("width", width);
                 json.addProperty("height", height);
                 CombiningURL("/api/setPosition", json.toString());

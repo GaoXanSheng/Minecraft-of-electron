@@ -4,6 +4,7 @@ buildscript {
         maven {
             url = uri("https://company/com/maven2")
         }
+        maven { url 'https://jitpack.io' }
         mavenCentral()
     }
     dependencies {
@@ -75,7 +76,6 @@ dependencies {
     annotationProcessor 'org.spongepowered:mixin:0.8.5:processor'
     // imgui
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-
 }
 tasks.named('processResources', ProcessResources).configure {
     var replaceProperties = [

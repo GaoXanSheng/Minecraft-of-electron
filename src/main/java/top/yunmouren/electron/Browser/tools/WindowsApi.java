@@ -48,17 +48,17 @@ public class WindowsApi {
 
     /**
      * @param taget 设置目标窗口为焦点
-     * @return
      */
     public boolean SetForegroundWindow(WinDef.HWND taget) {
         return user32.SetForegroundWindow(taget);
     }
-    public boolean SetFocus(WinDef.HWND taget){
+
+    public boolean SetFocus(WinDef.HWND taget) {
         return null != user32.SetFocus(taget);
     }
+
     /**
      * 窗口重叠
-     *
      */
     private void CalculateFrameArea() {
         // 获取窗口的整体大小

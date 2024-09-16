@@ -6,12 +6,9 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 import top.yunmouren.electron.Browser.tools.WindowsApi;
 import top.yunmouren.electron.Electron;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
+import java.io.*;
 import java.net.ServerSocket;
 import java.util.Map;
-import java.util.stream.Collectors;
 
 
 @OnlyIn(Dist.CLIENT)
@@ -20,7 +17,6 @@ public class Browser {
     private Process process;
     private final String BroswerPath = Minecraft.getInstance().gameDirectory.getAbsolutePath() + "\\minecraft_of_electron\\minecraft_of_electron.exe";
     public int BrowserPort = RandomPort();
-    public int ServerPort = RandomPort();
 
     public Browser() {
         new Thread(() -> {
@@ -29,14 +25,9 @@ public class Browser {
                 Map<String, String> environment = processBuilder.environment();
                 environment.put("LANG", "en_US.UTF-8");
                 environment.put("BrowserPort", String.valueOf(BrowserPort));
-                environment.put("ServerPort", String.valueOf(ServerPort));
                 process = processBuilder.start();
-                BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
-                String result = reader.lines().collect(Collectors.joining("\n"));
-                System.out.println("Output: \n" + result);
-                int exitCode = process.waitFor();
-                System.out.println("Exit Code: " + exitCode);
-            } catch (IOException | InterruptedException e) {
+                handleOutput(process);
+            } catch (IOException e) {
                 Electron.logger.info(e.getMessage());
             }
         }).start();
@@ -44,6 +35,20 @@ public class Browser {
             process.destroyForcibly();
         }));
     }
+
+    private void handleOutput(Process process) {
+        new Thread(() -> {
+            try (BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()))) {
+                String line;
+                while ((line = reader.readLine()) != null) {
+                    System.out.println(line);
+                }
+            } catch (IOException e) {
+                Electron.logger.info("Error reading process output: " + e.getMessage());
+            }
+        }).start();
+    }
+
 
     private int RandomPort() {
         try (ServerSocket socket = new ServerSocket(0)) {
