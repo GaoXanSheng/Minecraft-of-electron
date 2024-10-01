@@ -3,6 +3,7 @@ package top.yunmouren.electron.Browser;
 import net.minecraft.client.Minecraft;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
+import top.yunmouren.electron.Browser.tools.SimpleTcpClient;
 import top.yunmouren.electron.Browser.tools.WindowsApi;
 import top.yunmouren.electron.Electron;
 
@@ -18,6 +19,7 @@ public class Browser {
     private final String BroswerPath = Minecraft.getInstance().gameDirectory.getAbsolutePath() + "\\minecraft_of_electron\\minecraft_of_electron.exe";
     public int BrowserPort = RandomPort();
 
+    public SimpleTcpClient NodeJs = new SimpleTcpClient("localhost", BrowserPort);
     public Browser() {
         new Thread(() -> {
             try {

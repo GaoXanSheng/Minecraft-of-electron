@@ -131,6 +131,7 @@ public class WindowsApi {
     private void OverlapWindows(WinDef.HWND childWindowHandle, WinDef.HWND parentWindowHandle) {
         User32.WNDENUMPROC enumChildWindowsCallback = (browserWinHWND, lParam) -> {
             user32.SetParent(parentWindowHandle, childWindowHandle);
+            user32.SetForegroundWindow(parentWindowHandle);
             return true;
         };
         user32.EnumChildWindows(parentWindowHandle, enumChildWindowsCallback, Pointer.NULL);

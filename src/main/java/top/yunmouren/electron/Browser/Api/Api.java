@@ -9,36 +9,45 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 public class Api {
-    public static String CombiningURL(String url, String json) {
-        return Http.post("http://127.0.0.1:" + Client.browser.BrowserPort + url, json);
-    }
-
-    public static void sendInit() {
-        CombiningURL("/api/init", "{}");
+    public static String CombiningURL(JsonObject json) {
+        json.addProperty("form", "Minecraft");
+        Client.browser.NodeJs.sendMessage(json.toString());
     }
 
     public static void loadUrl(String url) {
         JsonObject json = new JsonObject();
-        json.addProperty("url", url);
-        CombiningURL("/api/loadUrl", json.toString());
+        json.addProperty("type", "LoadUrl");
+        json.addProperty("data", url);
+        CombiningURL(json);
     }
 
     public static void joinGui() {
-        CombiningURL("/api/joinGui", "{}");
-        Client.browser.Api.SetFocus(Client.browser.Api.getBrowserhWndParent());
+        JsonObject json = new JsonObject();
+        json.addProperty("type", "JoinGui");
+        json.addProperty("data", "");
+        CombiningURL(json);
     }
 
     public static void exitGui() {
-        CombiningURL("/api/exitGui", "{}");
-        Client.browser.Api.SetFocus(Client.browser.Api.getMinecrafthWndParent());
+        JsonObject json = new JsonObject();
+        json.addProperty("type", "ExitGui");
+        json.addProperty("data", "");
+        CombiningURL(json);
+//        Client.browser.Api.SetFocus(Client.browser.Api.getMinecrafthWndParent());
     }
 
     public static void openDevTools() {
-        CombiningURL("/api/openDevTools", "{}");
+        JsonObject json = new JsonObject();
+        json.addProperty("type", "OpenDevTools");
+        json.addProperty("data", "");
+        CombiningURL(json);
     }
 
     public static String getTitle() {
-        return CombiningURL("/api/getTitle", "{}");
+        JsonObject json = new JsonObject();
+        json.addProperty("type", "GetTitle");
+        json.addProperty("data", "");
+        CombiningURL(json);
     }
 
     private static Timer debounceTimer;
@@ -55,10 +64,12 @@ public class Api {
             public void run() {
                 // 要执行的操作
                 JsonObject json = new JsonObject();
-                json.addProperty("type", "setPosition");
-                json.addProperty("width", width);
-                json.addProperty("height", height);
-                CombiningURL("/api/setPosition", json.toString());
+                var data = new JsonObject();
+                data.addProperty("width", width);
+                data.addProperty("height", height);
+                json.add("data",data);
+                json.addProperty("type", "SetPosition");
+                CombiningURL(json);
             }
         }, 200);
     }
