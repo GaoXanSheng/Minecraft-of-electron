@@ -23,8 +23,6 @@ public class Command {
                                         .then(Commands.literal("exitGUI").executes(Command::exitGUI))
                                         .then(Commands.literal("openDevTools").executes(Command::openDevTools))
                                         .then(Commands.literal("RecalculateArea").executes(Command::RecalculateArea))
-                                        .then(Commands.literal("closeGUIOnClient").executes(Command::closeGUIOnClient))
-                                        .then(Commands.literal("openGUIOnClient").executes(Command::openGUIOnClient))
                                         .then(
                                                 Commands.literal("loadUrl").then(Commands.argument("url", StringArgumentType.string())
                                                         .executes(Command::loadUrl)
@@ -35,17 +33,6 @@ public class Command {
     }
     private static ServerPlayer getPlayer (CommandContext<CommandSourceStack> context) throws CommandSyntaxException {
       return EntityArgument.getPlayer(context, "PlayerName").connection.getPlayer();
-    }
-    private static int openGUIOnClient(CommandContext<CommandSourceStack> context) throws CommandSyntaxException {
-        ServerPlayer player = getPlayer(context);
-        Server.CHANNEL.send(PacketDistributor.PLAYER.with(() -> player), new SimpleNetwork("openGUIOnClient"));
-        return 1;
-    }
-
-    private static int closeGUIOnClient(CommandContext<CommandSourceStack> context) throws CommandSyntaxException {
-        ServerPlayer player = getPlayer(context);
-        Server.CHANNEL.send(PacketDistributor.PLAYER.with(() -> player), new SimpleNetwork("closeGUIOnClient"));
-        return 1;
     }
 
     private static int RecalculateArea(CommandContext<CommandSourceStack> context) throws CommandSyntaxException {

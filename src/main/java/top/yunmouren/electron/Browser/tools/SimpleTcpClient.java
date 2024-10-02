@@ -1,19 +1,22 @@
 package top.yunmouren.electron.Browser.tools;
 
 
+import com.google.gson.JsonObject;
+import top.yunmouren.electron.Electron;
+
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
 import java.net.Socket;
 import java.nio.charset.StandardCharsets;
+import java.util.Base64;
 
 public class SimpleTcpClient {
     private Socket socket;
     private PrintWriter out;
     private BufferedReader in;
-
-    public SimpleTcpClient(String host, int port) {
+    public void start(String host, int port) {
         try {
             socket = new Socket(host, port);
             out = new PrintWriter(new OutputStreamWriter(socket.getOutputStream(), StandardCharsets.UTF_8), true);
@@ -24,31 +27,46 @@ public class SimpleTcpClient {
         }
     }
 
-    public void sendMessage(String message) {
-        this.out.println(message);
+    public void sendMessage(JsonObject message) {
+        if (out == null)return;
+        this.out.println(encodeToBase64UrlSafe(message.toString()));
+    }
+    /**
+     * 将字符串转换为 URL 安全的 Base64 编码
+     *
+     * @param input 待编码的字符串
+     * @return URL 安全的 Base64 编码后的字符串
+     */
+    public static String encodeToBase64UrlSafe(String input) {
+        Base64.Encoder encoder = Base64.getUrlEncoder();
+        byte[] inputBytes = input.getBytes(StandardCharsets.UTF_8);
+        byte[] encodedBytes = encoder.encode(inputBytes);
+        return new String(encodedBytes, StandardCharsets.UTF_8);
     }
 
     private String receiveMessage() {
         try {
             return in.readLine(); // 确保服务器发送的消息包含换行符
         } catch (Exception e) {
-            e.printStackTrace();
+            Electron.logger.warn(e.getMessage());
             return null;
         }
     }
 
     private void listenForMessages() {
         try {
-            while (receiveMessage() != null) {
-                System.out.println(receiveMessage());
+            String msg;
+            while ((msg = receiveMessage()) != null) {
+                Electron.logger.info("res: " + msg);
+                new Handler(msg);
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            Electron.logger.warn(e.getMessage());
         } finally {
             try {
                 socket.close();
             } catch (Exception e) {
-                e.printStackTrace();
+                Electron.logger.warn(e.getMessage());
             }
         }
     }

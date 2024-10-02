@@ -19,7 +19,7 @@ public class Browser {
     private final String BroswerPath = Minecraft.getInstance().gameDirectory.getAbsolutePath() + "\\minecraft_of_electron\\minecraft_of_electron.exe";
     public int BrowserPort = RandomPort();
 
-    public SimpleTcpClient NodeJs = new SimpleTcpClient("localhost", BrowserPort);
+    public SimpleTcpClient NodeJs = new SimpleTcpClient();
     public Browser() {
         new Thread(() -> {
             try {
@@ -34,7 +34,7 @@ public class Browser {
             }
         }).start();
         Runtime.getRuntime().addShutdownHook(new Thread(() -> {
-            process.destroyForcibly();
+            if (process != null) process.destroyForcibly();
         }));
     }
 
@@ -43,7 +43,7 @@ public class Browser {
             try (BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()))) {
                 String line;
                 while ((line = reader.readLine()) != null) {
-                    System.out.println(line);
+                    Electron.logger.info(line);
                 }
             } catch (IOException e) {
                 Electron.logger.info("Error reading process output: " + e.getMessage());

@@ -1,5 +1,7 @@
 package top.yunmouren.electron.Browser.tools;
 
+import top.yunmouren.electron.Electron;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -36,15 +38,12 @@ public class Http {
                 }
             } else {
                 // 非 200 响应状态码
-                System.out.println("Error during request. Response code: " + responseCode);
-                System.out.println("Response message: " + conn.getResponseMessage());
-                System.out.println("URL: " + webUrl);
+                Electron.logger.error("Error during request. Response code: " + responseCode);
+                Electron.logger.error("Response message: " + conn.getResponseMessage());
+                Electron.logger.error("URL: " + webUrl);
             }
         } catch (Exception e) {
-            // 捕获并打印异常
-            System.out.println("Error during request: " + e.getMessage());
-            e.printStackTrace();
-            System.out.println("URL: " + webUrl);
+            Electron.logger.warn(e.getMessage());
         } finally {
             // 关闭 BufferedReader
             try {
@@ -52,8 +51,7 @@ public class Http {
                     in.close();
                 }
             } catch (IOException ioe) {
-                System.out.println("Error closing reader: " + ioe.getMessage());
-                ioe.printStackTrace();
+                Electron.logger.warn(ioe.getMessage());
             }
         }
 
@@ -92,12 +90,10 @@ public class Http {
                     result.append(line);
                 }
             } else {
-                System.out.println("在运行中发生错误:" + conn.getResponseCode());
-                System.out.println(webUrl);
+                Electron.logger.warn(String.valueOf(conn.getResponseCode()));
             }
         } catch (Exception e) {
-            System.out.println("在运行中发生错误:" + e.getMessage());
-            System.out.println(webUrl);
+            Electron.logger.warn(e.getMessage());
         } finally {
             try {
                 if (out != null) {
@@ -107,8 +103,7 @@ public class Http {
                     in.close();
                 }
             } catch (IOException ioe) {
-                System.out.println("在运行中发生错误:" + ioe.getMessage());
-                System.out.println(webUrl);
+                Electron.logger.warn(ioe.getMessage());
             }
         }
         return result.toString();
