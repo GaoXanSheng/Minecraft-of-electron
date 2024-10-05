@@ -19,8 +19,7 @@ public class Client {
         try {
             Thread.sleep(3000);
             browser.Api.overlapWindows();
-//            browser.NodeJs.start("localhost", browser.BrowserPort);
-            browser.NodeJs.start("localhost",9090);
+            browser.NodeJs.start("localhost", browser.BrowserPort);
         } catch (InterruptedException e) {
             Electron.logger.error(e.getMessage());
         }
