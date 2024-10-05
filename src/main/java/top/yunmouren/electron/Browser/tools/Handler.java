@@ -2,7 +2,10 @@ package top.yunmouren.electron.Browser.tools;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 
+@OnlyIn(Dist.CLIENT)
 public class Handler {
     public Handler(String receiveMessage) {
         Gson gson = new Gson();

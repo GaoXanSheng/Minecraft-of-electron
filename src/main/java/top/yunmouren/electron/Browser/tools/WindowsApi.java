@@ -5,12 +5,13 @@ import com.sun.jna.platform.win32.User32;
 import com.sun.jna.platform.win32.WinDef;
 import net.minecraft.client.Minecraft;
 import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.client.event.ScreenEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 
 import static top.yunmouren.electron.Browser.Api.Api.setPosition;
-
+@OnlyIn(Dist.CLIENT)
 public class WindowsApi {
     // 窗口置顶
     private final WinDef.HWND HWND_TOP = new WinDef.HWND(Pointer.NULL);

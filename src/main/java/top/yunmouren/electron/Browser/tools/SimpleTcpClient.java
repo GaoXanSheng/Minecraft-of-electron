@@ -2,6 +2,8 @@ package top.yunmouren.electron.Browser.tools;
 
 
 import com.google.gson.JsonObject;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 import top.yunmouren.electron.Electron;
 
 import java.io.BufferedReader;
@@ -11,7 +13,7 @@ import java.io.PrintWriter;
 import java.net.Socket;
 import java.nio.charset.StandardCharsets;
 import java.util.Base64;
-
+@OnlyIn(Dist.CLIENT)
 public class SimpleTcpClient {
     private Socket socket;
     private PrintWriter out;

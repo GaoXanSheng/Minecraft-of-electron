@@ -2,11 +2,13 @@ package top.yunmouren.electron.Browser.Api;
 
 
 import com.google.gson.JsonObject;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 import top.yunmouren.electron.Client.Client;
 
 import java.util.Timer;
 import java.util.TimerTask;
-
+@OnlyIn(Dist.CLIENT)
 public class Api {
     public static void CombiningURL(String type, JsonObject data) {
         JsonObject json = new JsonObject();
