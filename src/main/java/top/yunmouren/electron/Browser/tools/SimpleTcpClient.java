@@ -72,7 +72,7 @@ public class SimpleTcpClient {
         try {
             String msg;
             while ((msg = receiveMessage()) != null) {
-                Electron.logger.info("res: " + msg);
+                Electron.logger.debug(msg);
                 new Handler(msg);
             }
         } catch (Exception e) {

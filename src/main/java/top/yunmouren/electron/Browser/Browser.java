@@ -30,7 +30,7 @@ public class Browser {
                 process = processBuilder.start();
                 handleOutput(process);
             } catch (IOException e) {
-                Electron.logger.info(e.getMessage());
+                Electron.logger.error(e.getMessage());
             }
         }).start();
         Runtime.getRuntime().addShutdownHook(new Thread(() -> {
@@ -43,10 +43,10 @@ public class Browser {
             try (BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()))) {
                 String line;
                 while ((line = reader.readLine()) != null) {
-                    Electron.logger.info(line);
+                    Electron.logger.debug(line);
                 }
             } catch (IOException e) {
-                Electron.logger.info("Error reading process output: " + e.getMessage());
+                Electron.logger.error("Error reading process output: " + e.getMessage());
             }
         }).start();
     }
@@ -56,7 +56,7 @@ public class Browser {
         try (ServerSocket socket = new ServerSocket(0)) {
             return socket.getLocalPort();
         } catch (IOException e) {
-            Electron.logger.info(e.getMessage());
+            Electron.logger.error(e.getMessage());
         }
         return RandomPort();
     }

@@ -13,7 +13,7 @@ import net.minecraftforge.fml.common.Mod;
 import static top.yunmouren.electron.Browser.Api.Api.setPosition;
 @OnlyIn(Dist.CLIENT)
 public class WindowsApi {
-    // 窗口置顶
+    // windowTop
     private final WinDef.HWND HWND_TOP = new WinDef.HWND(Pointer.NULL);
     private final String Minecraft_Title = "overlapWindows";
     private final String Web_Title = "TestApp";
@@ -48,7 +48,7 @@ public class WindowsApi {
     }
 
     /**
-     * @param taget 设置目标窗口为焦点
+     * @param taget SetTheTargetWindowAsTheFocus
      */
     public boolean SetForegroundWindow(WinDef.HWND taget) {
         return user32.SetForegroundWindow(taget);
@@ -80,7 +80,7 @@ public class WindowsApi {
         private static int Windows_Frame_Height = 0;
 
         /**
-         * 同步窗口大小
+         * synchronizeWindowSize
          *
          * @param event
          */
@@ -95,7 +95,7 @@ public class WindowsApi {
         }
 
         /**
-         * 自动计算框架面积
+         * AutomaticallyCalculateFrameworkArea
          *
          * @param Width
          * @param Height
@@ -114,7 +114,7 @@ public class WindowsApi {
         }
 
         /**
-         * 手动计算框架面积
+         * ManuallyCalculateTheFrameworkArea
          */
         public static void onScreenResize() {
             user32.GetWindowRect(MinecrafthWndParent, rect);
@@ -124,7 +124,7 @@ public class WindowsApi {
     }
 
     /**
-     * 重叠窗口
+     * OverlayWindow
      *
      * @param childWindowHandle
      * @param parentWindowHandle

@@ -7,9 +7,7 @@ import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import top.yunmouren.electron.Browser.Browser;
 import top.yunmouren.electron.Browser.Handler.Handler;
-import top.yunmouren.electron.Browser.Handler.entry.ExitGui;
-import top.yunmouren.electron.Browser.Handler.entry.JoinGui;
-import top.yunmouren.electron.Browser.Handler.entry.LoadFile;
+import top.yunmouren.electron.Browser.Handler.entry.*;
 import top.yunmouren.electron.Electron;
 
 
@@ -25,12 +23,15 @@ public class Client {
         Handler.register("ExitGui",ExitGui.class);
         Handler.register("JoinGui", JoinGui.class);
         Handler.register("LoadFile", LoadFile.class);
+        Handler.register("EnterFullScreen", EnterFullScreen.class);
+        Handler.register("LeaveFullScreen", LeaveFullScreen.class);
     }
     public void onClientSetup(final FMLClientSetupEvent event) {
         try {
             Thread.sleep(3000);
             browser.Api.overlapWindows();
-            browser.NodeJs.start("localhost", browser.BrowserPort);
+            browser.NodeJs.start("localhost", 9090);
+//            browser.NodeJs.start("localhost", browser.BrowserPort);
         } catch (InterruptedException e) {
             Electron.logger.error(e.getMessage());
         }

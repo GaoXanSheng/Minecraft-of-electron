@@ -26,7 +26,7 @@ public class Handler {
                     handler.Handler(jsonObject);
                 }
             } catch (Exception e) {
-                Electron.logger.error(String.valueOf(e));
+                Electron.logger.error(e.getMessage());
             }
         }
     }
