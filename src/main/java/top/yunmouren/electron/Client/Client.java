@@ -6,6 +6,10 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import top.yunmouren.electron.Browser.Browser;
+import top.yunmouren.electron.Browser.Handler.Handler;
+import top.yunmouren.electron.Browser.Handler.entry.ExitGui;
+import top.yunmouren.electron.Browser.Handler.entry.JoinGui;
+import top.yunmouren.electron.Browser.Handler.entry.LoadFile;
 import top.yunmouren.electron.Electron;
 
 
@@ -15,8 +19,13 @@ public class Client {
     public static Browser browser = new Browser();
     public Client(){
         FMLJavaModLoadingContext.get().getModEventBus().addListener(this::onClientSetup);
+        RegisterHandler();
     }
-
+    public void RegisterHandler(){
+        Handler.register("ExitGui",ExitGui.class);
+        Handler.register("JoinGui", JoinGui.class);
+        Handler.register("LoadFile", LoadFile.class);
+    }
     public void onClientSetup(final FMLClientSetupEvent event) {
         try {
             Thread.sleep(3000);

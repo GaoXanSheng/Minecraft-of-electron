@@ -4,6 +4,7 @@ package top.yunmouren.electron.Browser.tools;
 import com.google.gson.JsonObject;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
+import top.yunmouren.electron.Browser.Handler.Handler;
 import top.yunmouren.electron.Electron;
 
 import java.io.BufferedReader;
@@ -29,6 +30,18 @@ public class SimpleTcpClient {
         }
     }
 
+    /**
+     *<p>
+     *     interface iHandler {
+     * 	    to?: 'Minecraft',
+     * 	    from: 'Minecraft' | 'Browser' | 'Node'
+     * 	    type: string
+     * 	    data: any
+     *     }
+     *</p>
+     *   If 'to' exists, it will be sent to Minecraft
+     *
+     */
     public void sendMessage(JsonObject message) {
         if (out == null)return;
         this.out.println(encodeToBase64UrlSafe(message.toString()));
