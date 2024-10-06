@@ -3,7 +3,6 @@ package top.yunmouren.electron;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.loading.FMLLoader;
-import org.slf4j.Logger;
 import top.yunmouren.electron.Client.Client;
 import top.yunmouren.electron.Server.Server;
 import top.yunmouren.electron.Server.Tools.Log;
