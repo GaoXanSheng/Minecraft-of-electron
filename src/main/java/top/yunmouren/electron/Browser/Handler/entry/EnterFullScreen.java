@@ -5,6 +5,9 @@ import top.yunmouren.electron.Browser.Handler.inherit.IHandler;
 
 import static top.yunmouren.electron.Browser.Tools.WindowsApi.WindowResizeListener.onScreenResize;
 
+/**
+ * ExecuteWhenHTMLTriggersFullScreenMethod
+ */
 public class EnterFullScreen extends IHandler {
     @Override
     public void Handler(JsonObject receiveMessage) {
