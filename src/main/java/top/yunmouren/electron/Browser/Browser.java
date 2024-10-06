@@ -3,8 +3,8 @@ package top.yunmouren.electron.Browser;
 import net.minecraft.client.Minecraft;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
-import top.yunmouren.electron.Browser.tools.SimpleTcpClient;
-import top.yunmouren.electron.Browser.tools.WindowsApi;
+import top.yunmouren.electron.Browser.Tools.SimpleTcpClient;
+import top.yunmouren.electron.Browser.Tools.WindowsApi;
 import top.yunmouren.electron.Electron;
 
 import java.io.*;

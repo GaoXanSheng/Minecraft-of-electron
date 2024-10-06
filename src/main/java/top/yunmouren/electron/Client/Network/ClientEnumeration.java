@@ -4,7 +4,7 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import top.yunmouren.electron.Browser.Api.Api;
 
-import static top.yunmouren.electron.Browser.tools.WindowsApi.WindowResizeListener.onScreenResize;
+import static top.yunmouren.electron.Browser.Tools.WindowsApi.WindowResizeListener.onScreenResize;
 
 
 @OnlyIn(Dist.CLIENT)

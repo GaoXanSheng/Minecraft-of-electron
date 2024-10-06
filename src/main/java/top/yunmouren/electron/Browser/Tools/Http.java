@@ -1,4 +1,4 @@
-package top.yunmouren.electron.Browser.tools;
+package top.yunmouren.electron.Browser.Tools;
 
 import top.yunmouren.electron.Electron;
 

@@ -1,4 +1,4 @@
-package top.yunmouren.electron.Browser.tools;
+package top.yunmouren.electron.Browser.Tools;
 
 
 import com.google.gson.JsonObject;
